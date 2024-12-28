@@ -1,0 +1,44 @@
+﻿@using SupWarden.UI.ViewModels.Share
+@model AddMemberToVaultVM
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container invite-member-container">
+
+        @if (ViewData["IsInvited"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">The Member has been successfully invited to the Vault.</p>
+            </div>
+        }
+
+        <form asp-action="InviteMember" asp-controller="Share" method="post" autocomplete="off">
+            <h1 class="custom-h1">Invite Member to Vault</h1>
+
+            <div hidden style="margin-bottom: 15px;">
+                <input class="custom-input" asp-for="VaultId" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter the User Email" asp-for="UserId" required />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label class="custom-label" asp-for="Permission">Permission Level</label>
+                <select class="custom-input" asp-for="Permission" required>
+                    <option value="Creator">Creator</option>
+                    <option value="Editor">Editor</option>
+                    <option value="Reader">Reader</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="custom-button">Invite</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+        </form>
+    </div>
+</div>

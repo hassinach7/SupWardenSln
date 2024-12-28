@@ -1,0 +1,61 @@
+﻿@model SupWarden.UI.ViewModels.User.CreateUserVM
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <h1 class="custom-h1">Create New User</h1>
+
+    @if (ViewData["IsCreated"] != null)
+    {
+        <div style="margin-bottom: 15px; text-align:center;">
+            <p class="alert alert-success">The user has been created successfully.</p>
+        </div>
+    }
+
+    <form asp-action="Create" asp-controller="User" method="post" autocomplete="off">
+        <div style="margin-bottom: 15px;">
+            <label asp-for="FirstName" class="custom-label">First Name</label>
+            <input class="custom-input" asp-for="FirstName" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="LastName" class="custom-label">Last Name</label>
+            <input class="custom-input" asp-for="LastName" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="Email" class="custom-label">Email</label>
+            <input class="custom-input" asp-for="Email" autocomplete="new-email" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="UserName" class="custom-label">User Name</label>
+            <input class="custom-input" asp-for="UserName" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="Password" class="custom-label">Password</label>
+            <input class="custom-input" asp-for="Password" type="password" autocomplete="new-password" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="ConfirmPassword" class="custom-label">Confirm Password</label>
+            <input class="custom-input" asp-for="ConfirmPassword" type="password" autocomplete="new-password" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label asp-for="PhoneNumber" class="custom-label">Phone Number</label>
+            <input class="custom-input" asp-for="PhoneNumber" />
+        </div>
+
+        <div>
+            <button type="submit" class="custom-button"> Validate</button>
+        </div>
+
+        <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+        </div>
+    </form>
+</div>

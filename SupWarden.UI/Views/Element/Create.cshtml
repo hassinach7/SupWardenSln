@@ -1,0 +1,68 @@
+﻿@using SupWarden.UI.ViewModels.Element
+@model CreateElementVM
+@{
+}
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container add-element-container">
+
+        @if (ViewData["IsCreated"] != null)
+        {
+            <div style="margin-bottom: 15px;text-align:center;">
+                <p class="alert alert-success">The Element is Created</p>
+            </div>
+        }
+
+        <form asp-action="Create" asp-controller="Element" method="post" autocomplete="off">
+            <h1 class="custom-h1">Create New Element</h1>
+
+            <div  style="margin-bottom: 15px;">
+                <select asp-for="VaultId" class="custom-input">
+                    <option selected value="">***** Select the Vault *****</option>
+                    @foreach (var vault in Model.VaultsList!)
+                    {
+                        <option value="@vault.Id">@vault.Label</option>
+                    }
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter the Name" asp-for="Name" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter Identifiant" asp-for="Identifiant" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter Identifiant Sup" asp-for="IdentifiantSup" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" asp-for="Uri" placeholder="Add URI (eX : https://exemple.com)" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" placeholder="Enter Note" asp-for="Note"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" placeholder="Enter Note Sup" asp-for="NoteSup"></textarea>
+            </div>
+            <div class="checkbox-container">
+                <input class="custom-checkbox" type="checkbox" asp-for="IsSensible" />
+                <label class="custom-label" asp-for="IsSensible">Sensible</label>
+            </div>
+
+
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+
+        </form>
+    </div>
+</div>

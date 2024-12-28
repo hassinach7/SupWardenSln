@@ -1,0 +1,34 @@
+﻿@using SupWarden.UI.ViewModels.Group
+
+@model CreateGroupeVM
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container add-vault-container">
+
+        @if (ViewData["IsCreated"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">The Group has been created successfully.</p>
+            </div>
+        }
+
+        <form asp-action="Create" asp-controller="Groupe" method="post" autocomplete="off">
+            <h1 class="custom-h1">Create New Group</h1>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter the Group Name" asp-for="Name" />
+            </div>
+
+          
+
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+        </form>
+    </div>
+</div>

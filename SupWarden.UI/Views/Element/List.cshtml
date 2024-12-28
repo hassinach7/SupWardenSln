@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ElementDto>
+@{
+    ViewData["Title"] = "List Elements";
+}
+
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">Elements</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-round">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <!-- Elements table -->
+                    <table class="table align-items-center mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" class="text-end">Name</th>
+                                <th scope="col" class="text-end">Identifiant/Sup</th>
+                                <th scope="col" class="text-end">Password</th>
+                                <th scope="col" class="text-end">URI</th>
+                                <th scope="col" class="text-end">Note/Sup</th>
+                                <th scope="col" class="text-end">Type Password</th>
+                                <th scope="col" class="text-end">Sensible</th>
+                                <th scope="col" class="text-end">Vault</th>
+                                <th scope="col" class="text-end">Created At</th>
+                                <th scope="col" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderByDescending(o => o.CreatedAt))
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </th>
+                                    <td class="text-end">@item.Name</td>
+                                    <td class="text-end">@item.Identifiant / @item.IdentifiantSup ?? </td>
+                                    <td class="text-end">********</td> <!-- For security, the password is hidden -->
+                                    <td class="text-end">@item.Uri</td>
+                                    <td class="text-end">@item.Note ??  / @item.NoteSup ?? </td>
+                                    <td class="text-end">@item.TypePassword </td>
+                                    <td class="text-end">
+                                        @if (item.IsSensible)
+                                        {
+                                            <span>Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span>No</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        @if (item.Vault != null)
+                                        {
+                                            <span>@item.Vault.Label</span>
+                                        }
+                                        else
+                                        {
+                                            <span>No Vault</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <span>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="row">
+                                            <div class="col-md-12 col-4 mt-1">
+                                                <a asp-controller="Element" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+                                            </div>
+                                            <div class="col-md-12 col-4 mt-1">
+                                                <a asp-controller="Element" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@using SupWarden.UI.ViewModels.User
+@model SetPinCodeVM
+@{
+    ViewData["Title"] = "Set PIN Code";
+}
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container set-pin-container">
+
+        @if (ViewData["PinCodeUpdated"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">Your PIN code has been set successfully.</p>
+            </div>
+        }
+        
+        <form asp-action="SetPinCode" asp-controller="User" method="post" autocomplete="off">
+            <h1 class="custom-h1">Set Your PIN Code</h1>
+
+            <div style="margin-bottom: 15px;">
+                <label class="custom-label">Old Pin Code</label>
+                <input value="@ViewData["pinCode"]" class="custom-input" readonly />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="PinCode" class="custom-label">New PIN Code (6 digits)</label>
+                <input asp-for="PinCode" type="number" class="custom-input" required />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="ConfirmPinCode" class="custom-label">Confirm New PIN Code</label>
+                <input asp-for="ConfirmPinCode" type="number" class="custom-input" required />
+            </div>
+
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All"></div>
+        </form>
+    </div>
+</div>

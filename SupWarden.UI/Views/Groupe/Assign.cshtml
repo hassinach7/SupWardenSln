@@ -1,0 +1,55 @@
+﻿@using SupWarden.UI.ViewModels.Group
+@model AssignGroupeVM
+@{
+    ViewData["Title"] = "Assign User to Group";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container assign-group-container">
+
+        @if (ViewData["IsAssigned"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">The User has been assigned successfully to the Group.</p>
+            </div>
+        }
+
+        <form asp-action="Assign" asp-controller="Groupe" method="post" autocomplete="off">
+            <h1 class="custom-h1">Assign User to Group: @Model.GroupName</h1>
+
+            <!-- Hidden Group ID -->
+            <input class="custom-input" hidden asp-for="GroupId" />
+
+            <!-- Display Group Name -->
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="GroupName" />
+            </div>
+
+            <!-- Select User -->
+            <div style="margin-bottom: 15px;">
+                <label asp-for="UserId" class="custom-label">Select User to Assign</label>
+                <select class="custom-input" asp-for="UserId">
+                    <option value="">***********</option>
+                    @if (Model.Users != null && Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id">@user.Email (@user.Email)</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <!-- Error Summary -->
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+        </form>
+    </div>
+</div>

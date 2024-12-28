@@ -1,0 +1,39 @@
+﻿@using SupWarden.UI.ViewModels.Group
+@model UpdateGroupeVM
+@{
+    ViewData["Title"] = "Update Group";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container update-Group-container">
+
+        @if (ViewData["IsUpdated"] != null)
+        {
+            <div style="margin-bottom: 15px;text-align:center;">
+                <p class="alert alert-success">The Vault has been updated successfully.</p>
+            </div>
+        }
+
+        <form asp-action="Edit" asp-controller="Groupe" method="post" autocomplete="off">
+
+            <input hidden asp-for="Id" />
+
+            <h1 class="custom-h1">Update Groupe: @Model.Name</h1>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter the Name" asp-for="Name" />
+            </div>
+
+            <div>
+                <button type="submit" class="custom-button">Update</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+
+        </form>
+    </div>
+</div>

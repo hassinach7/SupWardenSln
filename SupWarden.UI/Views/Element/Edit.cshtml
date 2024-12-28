@@ -1,0 +1,134 @@
+﻿@using SupWarden.UI.ViewModels.Element
+@model UpdateElementVM
+@{
+}
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container add-element-container">
+
+        @if (ViewData["IsUpdated"] != null)
+        {
+            <div style="margin-bottom: 15px;text-align:center;">
+                <p class="alert alert-success">The Element has been updated successfully</p>
+            </div>
+        }
+
+        <form asp-action="Edit" asp-controller="Element" method="post" autocomplete="off">
+
+            <input hidden asp-for="Id" />
+
+            <h1 class="custom-h1">Update Element : @Model.Name</h1>
+
+            <div style="margin-bottom: 15px;">
+                <select asp-for="VaultId" class="custom-input">
+                    @foreach (var vault in Model.VaultsList!)
+                    {
+                        <option value="@vault.Id">@vault.Label</option>
+                    }
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter the Name" asp-for="Name" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter Identifiant" asp-for="Identifiant" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter Identifiant Sup" asp-for="IdentifiantSup" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" asp-for="Uri" placeholder="Add URI (eX : https://exemple.com)" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" placeholder="Enter Note" asp-for="Note"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" placeholder="Enter Note Sup" asp-for="NoteSup"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter The Password" asp-for="Password" />
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#passwordModal">
+                    Password Generator
+                </button>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" placeholder="Enter The Type of Password" asp-for="TypePassword" />
+            </div>
+
+            <div class="checkbox-container">
+                <input class="custom-checkbox" type="checkbox" asp-for="IsSensible" />
+                <label class="custom-label" asp-for="IsSensible">Sensible</label>
+            </div>
+
+
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordModalLabel">Generate a Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="length">Password Length:</label>
+                        <input type="number" id="length" class="form-control" min="8" value="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="upper">Uppercase Letters (min.):</label>
+                        <input type="number" id="upper" class="form-control" min="0" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="lower">Lowercase Letters (min.):</label>
+                        <input type="number" id="lower" class="form-control" min="0" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="numbers">Numbers (min.):</label>
+                        <input type="number" id="numbers" class="form-control" min="0" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="special">Special Characters (min.):</label>
+                        <input type="number" id="special" class="form-control" min="0" value="1">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="avoidAmbiguous">
+                        <label class="form-check-label" for="avoidAmbiguous">Avoid ambiguous characters (I, L, O, 0, S, 5)</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Generate</button>
+                </form>
+                <h2 id="generatedPassword" class="mt-3"></h2>
+                <button id="copyButton" class="btn btn-secondary mt-2" style="display: none;">Copy to Clipboard</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section UpdateElementJS {
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/element/update.js" asp-append-version="true"></script>
+}

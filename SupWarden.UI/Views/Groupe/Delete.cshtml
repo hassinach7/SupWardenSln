@@ -1,0 +1,29 @@
+﻿@using SupWarden.UI.ViewModels.Group
+
+@model DeleteGroupeVM
+@{
+    ViewData["Title"] = "Delete Group";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container delete-group-container">
+
+        <form asp-action="Delete" asp-controller="Groupe" method="post" autocomplete="off">
+
+            <input hidden asp-for="Id" />
+
+            <h1 class="custom-h1">Delete Group: @Model.Name</h1>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="Name" />
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-danger">Validate</button>
+            </div>
+        </form>
+    </div>
+</div>

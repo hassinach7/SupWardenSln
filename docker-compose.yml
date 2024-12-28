@@ -1,0 +1,39 @@
+services:
+  api:
+    image: supwarden-api
+    build:
+      context: .
+      dockerfile: SupWarden.API/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__default=Server=db;Initial Catalog=SupWardenDb;User ID=sa;Password=ComplexPassword123!;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False
+    depends_on:
+      - db
+
+  ui:
+    image: supwarden-ui
+    build:
+      context: .
+      dockerfile: SupWarden.UI/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApiSetting__Url=http://api:5000/api/
+    depends_on:
+      - api
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "ComplexPassword123!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1343:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:

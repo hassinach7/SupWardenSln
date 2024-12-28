@@ -1,0 +1,165 @@
+﻿@SupWarden.API_HostAddress = https://localhost:7187
+@token =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ5YXNzaW5lZW5uYWplbSIsImp0aSI6IjkwZGRjZWVkLWIyYmYtNDU5OC1hZTdkLTljMjRiYjE0NDM0YyIsImVtYWlsIjoieWFzc2luZS5lbm5hamVtQGdtYWlsLmNvbSIsInVpZCI6IjI3OTA3NWVjLWNjNmItNDliMC1iYTgzLTU3NTJmMTA5NjRjZSIsImV4cCI6MTczMDkxMTQyNCwiaXNzIjoiU2VjdXJlQXBpIiwiYXVkIjoiU2VjdXJlQXBpVXNlciJ9.gn7FNWIQbGCGmdrB35A-T8I2zwdySR5c3_7I_W5HgGQ
+
+
+
+POST {{SupWarden.API_HostAddress}}/api/User/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "firstName": "Yassine",
+  "lastName": "ENNAJEM",
+  "email": "yassine.ennajem@gmail.com",
+  "password": "YASSINEennajem00--",
+  "userName": "yassineennajem"
+}
+
+###
+
+GET {{SupWarden.API_HostAddress}}/api/User/GetAll
+Authorization: Bearer {{token}}
+###
+
+POST {{SupWarden.API_HostAddress}}/api/auth/Login
+Content-Type: application/json
+
+{
+  "email":"yassine.ennajem@gmail.com",
+  "password":"YASSINEennajem00--"
+}
+
+###
+
+POST {{SupWarden.API_HostAddress}}/api/Element/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "My Second Element",
+  "identifiant": "admin@test.com",
+  "identifiantSup": "admin@test.comSup",
+  "password": "sqjfhdsqkjhjsqgf",
+  "uri": "test uri",
+  "note": "test norte",
+  "noteSup": "test norte sup",
+  "isSensible": true, 
+  "vaultId" : "f9f856e5-22cb-4881-937f-44df2dfb9e6e"
+}
+
+###
+
+POST {{SupWarden.API_HostAddress}}/api/Vault/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+{
+  "label": "Vault 4"
+}
+
+###
+
+PUT {{SupWarden.API_HostAddress}}/api/Element/Update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id":"9cb294c9-8b44-4a3f-a115-cb05491a607b",
+  "name": "element updated",
+  "identifiant": "admin@test.comupdated",
+  "identifiantSup": "admin@test.comSupupdated",
+  "password": "passupdated",
+  "uri": "test uri updated",
+  "note": "test norte updated",
+  "noteSup": "test norte sup updated",
+  "isSensible": false, 
+  "vaultId" : "f9f856e5-22cb-4881-937f-44df2dfb9e6e",
+  "typePassword" : "HASH512"
+}
+
+###
+
+DELETE {{SupWarden.API_HostAddress}}/api/Element/Delete?id=300bfa00-dfac-4691-8c1f-50e49fe396ae
+Authorization: Bearer {{token}}
+
+###
+
+GET {{SupWarden.API_HostAddress}}/api/Element/GetAll
+Authorization: Bearer {{token}}
+
+
+###
+
+
+GET {{SupWarden.API_HostAddress}}/api/share/GetAll
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{SupWarden.API_HostAddress}}/api/Share/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "VaultId" : "f9f856e5-22cb-4881-937f-44df2dfb9e6e",
+  "UserId": "279075ec-cc6b-49b0-ba83-5752f10964ce",
+  "Permission": 1
+}
+
+###
+
+
+PUT {{SupWarden.API_HostAddress}}/api/Share/Update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+   "VaultId" : "f9f856e5-22cb-4881-937f-44df2dfb9e6e",
+   "UserId": "279075ec-cc6b-49b0-ba83-5752f10964ce",
+   "Permission": 2
+}
+
+###
+
+DELETE {{SupWarden.API_HostAddress}}/api/Share/Delete
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+   "VaultId" : "f9f856e5-22cb-4881-937f-44df2dfb9e6e",
+   "UserId": "279075ec-cc6b-49b0-ba83-5752f10964ce"
+}
+
+###
+
+POST {{SupWarden.API_HostAddress}}/api/Group/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "Name" : "Super Friends"
+}
+
+###
+
+GET {{SupWarden.API_HostAddress}}/api/Group/GetAll
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{SupWarden.API_HostAddress}}/api/GroupeAssignments/Create
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "GroupId":"be7b368c-3b87-4b40-a44b-1d51e5658e70",
+  "UserId" : "279075ec-cc6b-49b0-ba83-5752f10964ce"
+}
+
+###
+
+GET {{SupWarden.API_HostAddress}}/api/GroupeAssignments/GetAll
+Authorization: Bearer {{token}}
+
+###

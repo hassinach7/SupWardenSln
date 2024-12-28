@@ -1,0 +1,78 @@
+﻿@using SupWarden.Dto.GroupDtos
+@model IEnumerable<GroupDto>
+@{
+    ViewData["Title"] = "List Groups";
+}
+
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">Groupes</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-round">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0" id="groupeTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="text-end">Name</th>
+                                <th scope="col" class="text-end">Assignments</th>
+                                <th scope="col" class="text-end">Created At</th>
+                                <th scope="col" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderByDescending(o => o.CreatedAt))
+                            {
+                                <tr>
+                                    <td class="text-end">@item.Name</td>
+                                    <td class="text-end">
+                                        @if (item.GroupeAssignments is not null && item.GroupeAssignments.Any())
+                                        {
+                                            @foreach (var ga in item.GroupeAssignments)
+                                            {
+                                                <span>@ga.User.Email</span> <br />
+                                            }
+                                        }
+
+                                    </td>
+                                    <td class="text-end">
+                                        <span>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="row">
+                                            <div class="col-md-12 col-4 mt-1">
+                                                <a asp-controller="Groupe" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+                                            </div>
+                                            <div class="col-md-12 col-4 mt-1">
+                                                <a asp-controller="Groupe" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                            </div>
+                                            <div class="col-md-12 col-4 mt-1">
+                                                <a asp-controller="Groupe" asp-action="Assign" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Assign</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section IndexGroupeJS {
+    <script>
+        $(document).ready(function() {
+            $("#groupeTable").DataTable({
+                'paging': true,
+                'searching': true,
+                'ordering':true
+            });
+        });
+    </script>
+}

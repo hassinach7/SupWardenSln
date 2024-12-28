@@ -1,0 +1,160 @@
+﻿@model IEnumerable<ElementDto>
+@{
+    ViewData["Title"] = "List Shared Elements";
+}
+
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">List Shared Elements</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-round">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <!-- Elements table -->
+                    <table class="table align-items-center mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" class="text-end">Name</th>
+                                <th scope="col" class="text-end">Identifiant/Sup</th>
+                                <th scope="col" class="text-end">Password</th>
+                                <th scope="col" class="text-end">URI</th>
+                                <th scope="col" class="text-end">Note/Sup</th>
+                                <th scope="col" class="text-end">Type Password</th>
+                                <th scope="col" hidden class="text-end">Sensible</th>
+                                <th scope="col" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderByDescending(o => o.CreatedAt))
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </th>
+                                    <td class="text-end">@item.Name</td>
+                                    <td class="text-end">@item.Identifiant / @item.IdentifiantSup ?? </td>
+                                    <td class="text-end">
+                                        @if (!item.IsSensible)
+                                        {
+                                            <span>@item.Password</span>
+                                        }
+                                        else
+                                        {
+                                            var value = $"-eye-{item.Id}";
+                                            var divId = $"div{value}";
+                                            var inputId = $"input{value}";
+                                            var btnId = $"btn{value}";
+                                            var spanId = $"spanpassword{value}";
+
+
+                                            <span id="@spanId"></span>
+                                            <button id="@btnId" onclick='VisulizePinCodeSection("@divId","@btnId")' class="btn btn-sm btn-danger">
+                                                Show
+                                            </button>
+
+                                            <div id="@divId" style="display:none;">
+                                                <div class="row">
+                                                    <div class="col-12 mb-2">
+                                                        <input type="number" id="@inputId" class="form-control" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button class="btn btn-sm btn-primary" onclick='CheckPinCode("@inputId","@item.Id","@divId","@btnId","@spanId")'>Check</button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button class="btn btn-sm btn-warning" onclick='VisulizePinCodeSection2("@divId","@btnId")'>Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td class="text-end">@item.Uri</td>
+                                    <td class="text-end">@item.Note ??  / @item.NoteSup ?? </td>
+                                    <td class="text-end">@item.TypePassword </td>
+                                    <td hidden class="text-end">
+                                        @if (item.IsSensible)
+                                        {
+                                            <span>Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span>No</span>
+                                        }
+                                    </td>
+
+                                    @if (item.Permission == SupWarden.Models.Enums.PermissionLevel.Editor)
+                                    {
+                                        <td class="text-end">
+                                            <div class="row">
+                                                <div class="col-md-12 col-4 mt-1">
+                                                    <a asp-controller="Element" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section JS_SharedElements {
+    <script>
+        function CheckPinCode(inputId, elementId, divId,btnId, spanId) {
+
+            var value =  document.getElementById(inputId).value;
+
+             try {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Element/CheckPinCode?pinCodePrama="+value+"&elementId="+elementId,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.isValid) {
+                            // Display The Password
+                            document.getElementById(divId).style.display = 'none';
+                            document.getElementById(btnId).style.display = 'none';
+                            document.getElementById(spanId).innerHTML = res.password;
+                        }
+                        else {
+                            alert(res.message);
+                        }
+                    },
+                    error: function (err) {
+
+                        console.log(err);
+                    }
+                })
+
+            } catch (e) {
+                console.log(e);
+            }
+            return false;
+        }
+
+        function VisulizePinCodeSection(divId, btnId) {
+             document.getElementById(divId).style.display = 'block';
+             document.getElementById(btnId).style.display = 'none';
+        }
+        function  VisulizePinCodeSection2(divId, btnId) {
+                 document.getElementById(divId).style.display = 'none';
+             document.getElementById(btnId).style.display = 'block';
+        }
+    </script>
+}

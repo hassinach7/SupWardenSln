@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7763b504-1b83-4304-8857-8367869d930f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="13.0.1" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupWarden.Dto\SupWarden.Dto.csproj" />
+    <ProjectReference Include="..\SupWarden.Ressource\SupWarden.Ressource.csproj" />
+  </ItemGroup>
+
+</Project>

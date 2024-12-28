@@ -1,0 +1,36 @@
+﻿@using SupWarden.UI.ViewModels.Vault
+@model DeleteVaultVM
+@{
+    ViewData["Title"] = "Delete Vault";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css"
+rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container delete-vault-container">
+
+        <form asp-action="Delete" asp-controller="Vault" method="post" autocomplete="off">
+
+             <input hidden asp-for="Id" />
+
+            <h1 class="custom-h1">Delete Vault: @Model.Label</h1>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="Label" />
+            </div>
+
+            
+            <div class="checkbox-container">
+                <input class="custom-checkbox" type="checkbox" asp-for="IsPrivate" />
+                <label class="custom-label" readonly asp-for="IsPrivate"> Private</label>
+            </div>
+
+           
+
+            <div>
+                <button type="submit" class="btn btn-danger">Validate</button>
+            </div>
+        </form>
+    </div>
+</div>

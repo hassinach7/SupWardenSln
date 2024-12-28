@@ -1,0 +1,63 @@
+﻿@using SupWarden.UI.ViewModels.Element
+@model DeleteElementVM
+@{
+}
+<link href="~/css/vault/CreateElementVaultstyle.css"
+      rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container add-element-container">
+
+        <form asp-action="Delete" asp-controller="Element" method="post" autocomplete="off">
+
+            <input hidden asp-for="Id" />
+
+            <h1 class="custom-h1">Delete Element : @Model.Name</h1>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="VaultName" />
+            </div>
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="Name" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="Identifiant" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="IdentifiantSup" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" asp-for="Uri" readonly />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" readonly asp-for="Note"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea class="custom-input custom-textarea" readonly asp-for="NoteSup"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="Password" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="TypePassword" />
+            </div>
+
+            <div class="checkbox-container">
+                <input class="custom-checkbox" type="checkbox" asp-for="IsSensible" />
+                <label class="custom-label" readonly asp-for="IsSensible">Sensible</label>
+            </div>
+
+
+            <div>
+                <button type="submit" class="btn btn-danger">Validate</button>
+            </div>
+        </form>
+    </div>
+</div>

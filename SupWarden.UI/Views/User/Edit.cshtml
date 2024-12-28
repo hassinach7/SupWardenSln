@@ -1,0 +1,58 @@
+﻿@using SupWarden.UI.ViewModels.User
+@model UpdateProfileVM
+
+@{
+    ViewData["Title"] = "Edit User Profile";
+}
+ 
+
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container edit-user-container">
+
+        @if (ViewData["IsUpdated"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">The user's profile has been updated successfully.</p>
+            </div>
+        }
+
+        <form asp-action="Edit" asp-controller="User" method="post" autocomplete="off">
+            <h1 class="custom-h1">Edit User Profile</h1>
+
+
+            <input type="hidden" asp-for="Id" />
+
+
+            <div class="input-container" style="margin-bottom: 15px;">
+                <label asp-for="FirstName" class="custom-label">First Name</label>
+                <input class="custom-input" asp-for="FirstName" />
+            </div>
+
+
+            <div class="input-container" style="margin-bottom: 15px;">
+                <label asp-for="LastName" class="custom-label">Last Name</label>
+                <input class="custom-input" asp-for="LastName" />
+            </div>
+
+            <div class="input-container" style="margin-bottom: 15px;">
+                <label asp-for="Email" class="custom-label">Email</label>
+                <input class="custom-input" asp-for="Email" readonly />
+            </div>
+
+            <div class="input-container" style="margin-bottom: 15px;">
+                <label asp-for="PhoneNumber" class="custom-label">Phone Number</label>
+                <input class="custom-input" asp-for="PhoneNumber" />
+            </div>
+
+            <div>
+                <button type="submit" class="custom-button">Update</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+        </form>
+    </div>
+</div>

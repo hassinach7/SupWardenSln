@@ -1,0 +1,73 @@
+﻿@using SupWarden.UI.ViewModels.Vault
+@model ShareVaultVM
+@{
+    ViewData["Title"] = "Share Vault";
+}
+
+<link href="~/css/vault/CreateElementVaultstyle.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="custom-container">
+    <div class="form-container add-vault-container">
+
+        @if (ViewData["IsShared"] != null)
+        {
+            <div style="margin-bottom: 15px; text-align:center;">
+                <p class="alert alert-success">The Vault has been Shared successfully.</p>
+            </div>
+        }
+
+        <form asp-action="Share" asp-controller="Vault" method="post" autocomplete="off">
+            <h1 class="custom-h1">Share The Vault : @Model.VaultName </h1>
+
+            <input class="custom-input" hidden asp-for="VaultId" />
+
+            <div style="margin-bottom: 15px;">
+                <input class="custom-input" readonly asp-for="VaultName" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="UserId"></label>
+                <select class="custom-input" readonly asp-for="UserId">
+                    <option value="">***********</option>
+                    @if (Model.Users is not null && Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id">@user.Email</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="GroupId"></label>
+                <select class="custom-input" readonly asp-for="GroupId">
+                    <option value="">***********</option>
+                    @if (Model.Groups is not null && Model.Groups.Any())
+                    {
+                        foreach (var group in Model.Groups)
+                        {
+                            <option value="@group.Id">@group.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="PermissionLevel"></label>
+                <select class="custom-input" readonly asp-for="PermissionLevel">
+                    <option value="0">Creator</option>
+                    <option value="1">Editor</option>
+                    <option value="2">Reader</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="custom-button">Validate</button>
+            </div>
+
+            <div style="margin-top: 15px;" class="alert alert-danger text-danger" asp-validation-summary="All">
+            </div>
+        </form>
+    </div>
+</div>
