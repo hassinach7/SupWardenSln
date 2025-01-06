@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupWarden.Dto", "SupWarden.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupWarden.Ressource", "SupWarden.Ressource\SupWarden.Ressource.csproj", "{D6CD5D1B-5D69-4170-9CE8-BA6C9C91D5DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupWarden.AppHost.Orchestrator", "SupWarden.AppHost.Orchestrator\SupWarden.AppHost.Orchestrator.csproj", "{F426F5D2-9645-47E3-89D7-840E53C9EEE9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,14 +66,6 @@ Global
 		{D6CD5D1B-5D69-4170-9CE8-BA6C9C91D5DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6CD5D1B-5D69-4170-9CE8-BA6C9C91D5DA}.Release|x64.ActiveCfg = Release|Any CPU
 		{D6CD5D1B-5D69-4170-9CE8-BA6C9C91D5DA}.Release|x64.Build.0 = Release|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Debug|x64.Build.0 = Debug|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Release|x64.ActiveCfg = Release|Any CPU
-		{F426F5D2-9645-47E3-89D7-840E53C9EEE9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
